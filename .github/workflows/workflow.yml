@@ -18,7 +18,7 @@ jobs:
           source: '/' # REQUIRED
           output: 'thumbnails' # REQUIRED
           sizes: x500 # REQUIRED
-          extensions: 'jpg, JPG, jpeg, JPEG, png, PNG, webp, gif, GIF, tiff'
+          extensions: 'jpg, jpeg, png, webp, gif, tiff'
           subfolder: '%D'
           filename: '%F'
           fit: 'cover'
