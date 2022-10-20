@@ -2,9 +2,7 @@ name: Generate thumbnails
 on:
   push:
     branches:
-      - master
-    paths:
-      - 'images/*' # Only run on this path changes
+      - main
 jobs:
   generate_thumbnails:
     name: Generate thumbnails
