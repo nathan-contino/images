@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 10 # Should be enough for all runs, GH default is 360 which is unreasonable...
     steps:
       - name: Checkout repository # Check out the repo to access the input image folder.
-        uses: actions/checkout@master
+        uses: actions/checkout@main
       - name: Process Images
         id: images
         uses: subic/ghaction-thumbnails@v1.1 # Tag number optional, breaking changes not expected.
