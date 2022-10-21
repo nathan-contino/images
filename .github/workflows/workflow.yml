@@ -19,6 +19,7 @@ jobs:
           output: 'thumbnails' # REQUIRED
           sizes: x500 # REQUIRED
           extensions: 'jpg, jpeg, png, webp, tiff'
+          subfolder: false
           filename: '%F'
           fit: 'cover'
           position: 'centre'
