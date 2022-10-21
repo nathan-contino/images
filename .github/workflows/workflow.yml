@@ -4,32 +4,19 @@ on:
     branches:
       - main
 jobs:
-  generate_thumbnails:
-    name: Generate thumbnails
+  build:
+    name: custom-thumbnail
     runs-on: ubuntu-latest
-    timeout-minutes: 10 # Should be enough for all runs, GH default is 360 which is unreasonable...
     steps:
-      - name: Checkout repository # Check out the repo to access the input image folder.
-        uses: actions/checkout@v3
-      - name: Process Images
-        id: images
-        uses: subic/ghaction-thumbnails@v1.1 # Tag number optional, breaking changes not expected.
-        with: # Arguments:
-          source: 'images/*' # REQUIRED
-          output: 'thumbnails' # REQUIRED
-          sizes: x500 # REQUIRED
-          extensions: 'jpg, jpeg, png, webp, tiff'
-          subfolder: false
-          filename: '%F'
-          fit: 'cover'
-          position: 'centre'
-          enlarge: 'true'
-          overwrite: 'false'
-      - name: Commit thumbnail folder # This step will commit generated files, remove if not used as a single purpose workflow. Will exit gracefully if no changes are found.
-        run: |
-          echo "Committing thumbnails folder"
-          git config --local user.name "${{github.actor}}"
-          git config --local user.email "${{github.actor}}@users.noreply.github.com"
-          git add ./thumbnails || exit 0
-          git commit -m "[skip ci] Auto-generated missing thumbnails" -a || exit 0
-          git push -f -q https://${{secrets.GH_SECRET}}@github.com/${{github.repository}}
+      - uses: actions/checkout@v2
+      - name: custom-thumbnail
+        uses: deep5050/custom-thumbnail@master
+        with:
+          github_token: ${{ secrets.GH_SECRET}}
+          inplace: "disable" # 'enable' / "disable" [ write thumbnails at their origin path (replace) ], if disabled writes under '.thumbnails' directory 
+          base_height_width: "500" # (px) max limit of height/width
+          keep_dir_structure: "enable" # 'enable'/'disable' keep the input images directory structure while writing to .thumbnails directory
+      - name: Commit & Push changes
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_SECRET }}
