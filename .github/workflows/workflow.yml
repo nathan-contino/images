@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "images/**"
 jobs:
   build:
     name: custom-thumbnail
