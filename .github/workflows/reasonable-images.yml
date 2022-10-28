@@ -9,10 +9,10 @@ jobs:
   workflow-command-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Disable workflow commands
-        run: |
-	  npm install -g recursive-resize
-          recres -i images/ -o reasonable-images/ -w 2000
+      - name: Install recursive-resize
+      - run: npm install -g recursive-resize
+      - name: Run recursive-resize
+      - run: recres -i images/ -o reasonable-images/ -w 2000
       - name: Commit & Push changes
         uses: mikeal/publish-to-github-action@master
         env:
