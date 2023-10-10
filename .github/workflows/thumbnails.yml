@@ -21,7 +21,6 @@ jobs:
           github_token: ${{ secrets.GH_SECRET}}
           inplace: "disable" # 'enable' / "disable" [ write thumbnails at their origin path (replace) ], if disabled writes under '.thumbnails' directory 
           base_height_width: "1000" # (px) max limit of height/width
-          keep_dir_structure: "enable" # 'enable'/'disable' keep the input images directory structure while writing to .thumbnails directory
           overwrite_existing_thumbnails: "disable"
       - name: Commit & Push changes
         uses: mikeal/publish-to-github-action@master
