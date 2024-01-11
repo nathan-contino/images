@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: custom-thumbnail
         uses: nathan-contino/custom-thumbnail@master
+        env:
+          INPUT_KEEP_DIR_STRUCTURE: true
         with:
           github_token: ${{ secrets.GH_SECRET}}
           inplace: "disable" # 'enable' / "disable" [ write thumbnails at their origin path (replace) ], if disabled writes under '.thumbnails' directory 
