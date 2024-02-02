@@ -12,18 +12,8 @@ Please keep full size images below 5MB in size, so users can view them directly 
 
 After adding images to this repository, you should resize them to be vaguely reasonably sized.
 
-I like to use the `recursive-resize` NPM module for this.
+* Add the original quality images in whatever format you want to the `images` folder. In the macOS Photos app, **File > Export > Export Unmodified Original** accomplishes this with "File Name" set to "Sequential" and an empty prefix (resulting in ascending numbers for image names).
 
-To install the module globally:
+* Add a reasonably-sized image (hopefully less than 5MB) in the `reasonable-images` folder. In the macOS Photos app, **File > Export > Export** accomplishes this. I prefer PNG images, and find a width of 2000 pixels usually gets under 5MB. As with the original quality images, use "Sequential" file names with no prefix to preserve your sanity when adding the images to a post.
 
-```
-npm install -g recursive-resize
-```
-
-To generate reasonable image sizes for all the raw images stored in this repo:
-
-```
-recres -i images/ -o reasonable-images/ -w 2000
-```
-
-Voila! The reasonable images are all 2000 pixels wide, so plenty nice looking. But they should also end up less than 1MB in size. And if you ever need the FULL size image, you can still access it in `/images`.
+* Add a thumbnail image (hopefully less than 500KB) in the `thumbnails` folder. In the macOS Photos app, **File > Export > Export** accomplishes this. I prefer PNG images, and find a width of 700 pixels usually gets under 500KB while looking decent enough in my posts. As with the original quality images, use "Sequential" file names with no prefix to preserve your sanity when adding the images to a post.
