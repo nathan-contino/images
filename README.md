@@ -15,33 +15,35 @@ or
 sudo apt install webp
 ```
 
-And then use the following command to generate webps for all images in your directory:
+First, export an album of images into a directory, using the name pattern `YYYY-MM-DD-post-title`.
+
+Use the following command to generate WEBPs equivalents of all images in your directory:
 
 ```
-find . -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -exec sh -c 'cwebp -q 85 -mt "$1" -o "${1%.*}.webp"' sh {} \;
+find . -iname "*.png" -o -iname "*.PNG" -o -iname "*.jpg" -o -iname "*.JGP" -o -iname "*.jpeg" -exec sh -c 'cwebp -q 85 -mt "$1" -o "${1%.*}.webp"' sh {} \;
 ```
 
-Then, use the following command to generate reasonably sized images, then thumbnails (you may need to manually create the corresponding folders):
+After generating the WEBP images, feel free to delete the original images; the WEBPs should be close enough in quality, and a _lot_ smaller.
+
+Then:
+
+. Create folders with the same name in `reasonable-images` and `thumbnails/images`.
+. Navigate into the `images` folder that contains your new images, and use the following commands to generate reasonably sized images, then thumbnails:
 
 ```
-find . -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -exec sh -c 'cwebp -q 85 -mt -resize 2000 "$1" -o "../reasonable-images/${1%.*}.webp"' sh {} \;
+find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 2000 0 "$1" -o "../../reasonable-images/<folder name here>/${1%.*}.webp"' sh {} \;
+```
+```
+find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 1000 0 "$1" -o "../../thumbnails/images/<folder name here>/${1%.*}.webp"' sh {} \;
 ```
 
-```
-find . -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -exec sh -c 'cwebp -q 85 -mt -resize 1000 "$1" -o "../thumbnails/${1%.*}.webp"' sh {} \;
-```
-
-This finds images with the (case-insensitive) file extensions `png`, `jpg`, and `jpeg`, then executes the `cwebp` command to generate an 85% quality webp version of the image.
-
-Then you can use these commands to delete the original images (hopefully you saved a full copy elsewhere?):
+Double check that the images look correct, haven't rotated, and have reasonable sizes (generally less than 1MB for "reasonable", and less than 250KB for thumbnails). If an image rotates, you can use the following `imagemagick` command to fix it:
 
 ```
-find . -iname "*.jpg" -exec sh -c 'rm -rf "$1"' sh {} \;
-
-find . -iname "*.png" -exec sh -c 'rm -rf "$1"' sh {} \;
-
-find . -iname "*.jpeg" -exec sh -c 'rm -rf "$1"' sh {} \;
+magick convert <image>.webp -rotate 90 <image>.webp
 ```
+
+You might have to run the command 2-3 times to get the image into the right orientation.
 
 ## Thumbnails
 
