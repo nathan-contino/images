@@ -17,10 +17,10 @@ sudo apt install webp
 
 First, export an album of images into a directory, using the name pattern `YYYY-MM-DD-post-title`.
 
-Use the following command to generate WEBPs equivalents of all images in your directory:
+Use the following command to generate WEBPs equivalents of all images in your directory (this assumes that all images use the extension `.jpg`; you can append `-o -iname "*.<extension>"` before the `-exec` flag to include others:
 
 ```
-find . -iname "*.png" -o -iname "*.PNG" -o -iname "*.jpg" -o -iname "*.JGP" -o -iname "*.jpeg" -exec sh -c 'cwebp -q 85 -mt "$1" -o "${1%.*}.webp"' sh {} \;
+find . -iname "*.jpg" -exec sh -c 'cwebp -q 85 -mt "$1" -o "${1%.*}.webp"' sh {} \;
 ```
 
 After generating the WEBP images, feel free to delete the original images; the WEBPs should be close enough in quality, and a _lot_ smaller.
