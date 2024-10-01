@@ -31,10 +31,10 @@ Then:
 . Navigate into the `images` folder that contains your new images, and use the following commands to generate reasonably sized images, then thumbnails:
 
 ```
-find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 2000 0 "$1" -o "../../reasonable-images/<folder name here>/${1%.*}.webp"' sh {} \;
+find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 2000 0 "$1" -o "../../reasonable-images/${PWD##*/}/${1%.*}.webp"' sh {} \;
 ```
 ```
-find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 1000 0 "$1" -o "../../thumbnails/images/<folder name here>/${1%.*}.webp"' sh {} \;
+find . -iname "*.webp" -exec sh -c 'cwebp -q 85 -mt -resize 1100 0 "$1" -o "../../thumbnails/images/${PWD##*/}/${1%.*}.webp"' sh {} \;
 ```
 
 Double check that the images look correct, haven't rotated, and have reasonable sizes (generally less than 1MB for "reasonable", and less than 250KB for thumbnails). If an image rotates, you can use the following `imagemagick` command to fix it:
